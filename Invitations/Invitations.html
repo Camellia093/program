@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小树的邀请函</title>
+    <title>小明的邀请函</title>
     <style>
         body {
             font-family: 'Microsoft YaHei', sans-serif;
@@ -13,60 +13,257 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
             position: relative;
+            overflow: hidden;
         }
         .container {
             text-align: center;
-            max-width: 600px;
+            max-width: 888px;
+            width: 93%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
-        h1 { color: #333; margin-bottom: 10px; }
-        p  { color: #666; margin-bottom: 30px; }
-        .face-container { position: relative; width:200px; height:200px; margin:30px auto; }
-        .face { width:200px; height:200px; border-radius:50%; background:linear-gradient(135deg,#f8d568,#c9e265); position:relative; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:background 0.5s ease; }
-        .eyes { position:absolute; top:60px; width:100%; display:flex; justify-content:center; }
-        .eye { width:40px; height:40px; background:white; border-radius:50%; margin:0 15px; position:relative; }
-        .pupil { width:20px; height:20px; background:#3a2a1d; border-radius:50%; position:absolute; top:10px; left:10px; transition:transform 0.3s ease; }
-        .mouth { position:absolute; width:80px; height:40px; background:#d64541; border-radius:0 0 40px 40px; bottom:50px; left:60px; overflow:hidden; transition:all 0.3s ease; }
-        .tooth { width:20px; height:15px; background:white; position:absolute; top:0; left:30px; border-radius:0 0 5px 5px; }
-        .cheeks { position:absolute; width:100%; top:100px; display:flex; justify-content:space-between; padding:0 30px; box-sizing:border-box; opacity:0; transition:opacity 0.3s; }
-        .cheek { width:30px; height:20px; background:#f8a5a5; border-radius:50%; }
-        .buttons { display:flex; justify-content:space-between; width:100%; max-width:400px; margin-top:30px; }
-        .btn { padding:12px 30px; border:none; border-radius:5px; font-size:16px; cursor:pointer; transition:all 0.3s; color:white; font-weight:bold; position: relative; }
-        .accept { background:#5cb85c; z-index:2; }
-        .accept:hover { background:#4cae4c; }
+        h1 { 
+            color: #333; 
+            margin-bottom: 15px; 
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        p { 
+            color: #666; 
+            margin-bottom: 30px; 
+            font-size: 18px;
+        }
+        .face-container { 
+            position: relative; 
+            width: 220px; 
+            height: 220px; 
+            margin: 30px auto; 
+        }
+        .face { 
+            width: 220px; 
+            height: 220px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #f8d568, #c9e265); 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .eyes { 
+            position: absolute; 
+            top: 70px; 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+        }
+        .eye { 
+            width: 45px; 
+            height: 45px; 
+            background: white; 
+            border-radius: 50%; 
+            margin: 0 18px; 
+            position: relative; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .pupil { 
+            width: 22px; 
+            height: 22px; 
+            background: #3a2a1d; 
+            border-radius: 50%; 
+            position: absolute; 
+            top: 12px; 
+            left: 12px; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        .eyelid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #f8d568;
+            top: -100%;
+            left: 0;
+            border-radius: 50%;
+            transition: top 0.15s ease;
+            z-index: 2;
+        }
+        .mouth { 
+            position: absolute; 
+            width: 90px; 
+            height: 45px; 
+            background: #d64541; 
+            border-radius: 0 0 45px 45px; 
+            bottom: 45px; 
+            left: 65px; 
+            overflow: hidden; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+        }
+        .tooth { 
+            width: 22px; 
+            height: 18px; 
+            background: white; 
+            position: absolute; 
+            top: 0; 
+            left: 34px; 
+            border-radius: 0 0 5px 5px; 
+            box-shadow: 0 2px 2px rgba(0,0,0,0.05);
+        }
+        .cheeks { 
+            position: absolute; 
+            width: 100%; 
+            top: 110px; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 35px; 
+            box-sizing: border-box; 
+            opacity: 0; 
+            transition: opacity 0.4s ease; 
+        }
+        .cheek { 
+            width: 35px; 
+            height: 25px; 
+            background: #f8a5a5; 
+            border-radius: 50%; 
+            opacity: 0.8;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .buttons { 
+            display: flex; 
+            justify-content: space-between; 
+            width: 100%; 
+            max-width: 400px; 
+            margin-top: 40px; 
+        }
+        .btn { 
+            padding: 14px 35px; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            color: white; 
+            font-weight: bold; 
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .accept { 
+            background: linear-gradient(to right, #5cb85c, #4cae4c); 
+            z-index: 2; 
+        }
+        .accept:hover { 
+            background: linear-gradient(to right, #4cae4c, #3c9d3c);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(92, 184, 92, 0.3);
+        }
         .reject {
-            background:#d9534f;
-            position:absolute;
-            top:67%;
-            left: calc(60%);
-            z-index:1;
-            transition:left 0.2s ease, top 0.2s ease;
+            background: linear-gradient(to right, #d9534f, #c9302c);
+            position: absolute;
+            bottom: 7%;
+            right: calc(3%);
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .reject:hover { background:#c9302c; }
-        .happy .mouth { border-radius:40px 40px 0 0; height:30px; bottom:60px; }
-        .sad .mouth   { border-radius:0 0 40px 40px; height:30px; bottom:40px; }
-        .sad .face    { background:linear-gradient(135deg,#f8d568,#c9e265 30%); }
-        .happy .cheeks{ opacity:1; }
+        .reject:hover { 
+            background: linear-gradient(to right, #c9302c, #b92c28);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(217, 83, 79, 0.3);
+        }
+        /* 表情状态样式修正 */
+        .happy .mouth { 
+            border-radius: 0 0 45px 45px; /* 微笑的嘴巴，上方圆弧 */
+            height: 45px; 
+            bottom: 45px; 
+            background: #d64541;
+        }
+        .sad .mouth { 
+            border-radius: 0 0 45px 45px; /* 伤心的嘴巴，下方圆弧 */
+            height: 45px; 
+            bottom: 45px; 
+        }
+        .sad .face { 
+            background: linear-gradient(135deg, #f8d568, #c9e265 30%); 
+        }
+        .happy .cheeks { 
+            opacity: 1; 
+        }
+        .happy .cheek {
+            transform: scale(1);
+        }
         /* Bounce animation for accept button */
         @keyframes bounce {
-            0%, 100% { top: 0; }
-            50% { top: -10px; }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
         }
         .bounce {
-            animation: bounce 0.4s ease;
+            animation: bounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        /* 背景装饰 */
+        .bg-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800);
+            top: -100px;
+            left: -100px;
+        }
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #4caf50, #8bc34a);
+            bottom: -50px;
+            right: -50px;
+        }
+        .bg-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #03a9f4, #00bcd4);
+            bottom: 100px;
+            left: 10%;
         }
     </style>
 </head>
 <body>
+    <div class="bg-decoration">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
     <div class="container">
-        <h1>小树向你发送了一封对象邀请函</h1>
-        <p>小树希望你成为ta的对象，是否接受？</p>
+        <h1>小明向你发送了一封对象邀请函</h1>
+        <p>小明希望你成为ta的对象，是否接受？</p>
         <div class="face-container">
             <div class="face" id="face">
                 <div class="eyes">
-                    <div class="eye"><div class="pupil" id="leftPupil"></div></div>
-                    <div class="eye"><div class="pupil" id="rightPupil"></div></div>
+                    <div class="eye">
+                        <div class="eyelid" id="leftEyelid"></div>
+                        <div class="pupil" id="leftPupil"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="eyelid" id="rightEyelid"></div>
+                        <div class="pupil" id="rightPupil"></div>
+                    </div>
                 </div>
                 <div class="mouth"><div class="tooth"></div></div>
                 <div class="cheeks"><div class="cheek"></div><div class="cheek"></div></div>
@@ -126,7 +323,7 @@
         const hf = t, sf = 1 - t;
         mouth.style.borderRadius = `${40 * hf}px ${40 * hf}px ${40 * sf}px ${40 * sf}px`;
         mouth.style.height = `${30 + 10 * sf}px`;
-        mouth.style.bottom = `${40 + 20 * hf}px`;
+        mouth.style.bottom = `${40 + 10 * hf}px`;
         cheeks.style.opacity = sf;
         face.style.background = `linear-gradient(135deg,#f8d568,#c9e265 ${30 + 70 * sf}%)`;
     }
@@ -140,21 +337,51 @@
         fleeingEnabled = true;
     });
 
-    // 鼠标移入拒绝按钮时逃跑，同时放大“接受”按钮
+    // 鼠标移入拒绝按钮时逃跑，同时放大"接受"按钮
     rejectBtn.addEventListener('mouseenter', e => {
         if (!fleeingEnabled) return;
         const w = rejectBtn.offsetWidth, h = rejectBtn.offsetHeight;
         const mx = e.clientX, my = e.clientY;
-        let nx, ny, overlap;
+        let nx, ny;
         const aRect = acceptBtn.getBoundingClientRect();
+        
+        // 计算可视区域的边界，确保按钮完全在可视范围内
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // 尝试找到一个合适的位置
+        let attempts = 0;
+        const maxAttempts = 50; // 防止无限循环
+        
         do {
-            nx = Math.random() * (window.innerWidth - w);
-            ny = Math.random() * (window.innerHeight - h);
-            overlap = !(nx + w < aRect.left || nx > aRect.right || ny + h < aRect.top || ny > aRect.bottom);
-        } while (Math.hypot(nx - mx, ny - my) < minDistance || overlap);
-
+            // 确保按钮完全在视口内
+            nx = Math.random() * (viewportWidth - w);
+            ny = Math.random() * (viewportHeight - h);
+            
+            // 检查是否与接受按钮重叠
+            const overlap = !(
+                nx + w < aRect.left || 
+                nx > aRect.right || 
+                ny + h < aRect.top || 
+                ny > aRect.bottom
+            );
+            
+            // 检查是否离鼠标太近
+            const tooClose = Math.hypot(nx - mx, ny - my) < minDistance;
+            
+            // 如果位置合适或者尝试次数过多，则退出循环
+            if ((!overlap && !tooClose) || ++attempts >= maxAttempts) break;
+            
+        } while (true);
+        
+        // 应用新位置，保持按钮原有样式和大小
+        rejectBtn.style.position = 'fixed'; // 使用fixed定位以相对于视口
         rejectBtn.style.left = `${nx}px`;
-        rejectBtn.style.top  = `${ny}px`;
+        rejectBtn.style.top = `${ny}px`;
+        // 重要：清除可能影响大小的样式
+        rejectBtn.style.transform = '';
+        rejectBtn.style.width = `${w}px`;
+        rejectBtn.style.height = `${h}px`;
 
         escapeCount++;
         const scale = 1 + 0.07 * escapeCount;
@@ -165,34 +392,62 @@
         }, { once: true });
 
         // 达到最大逃跑次数后，隐藏拒绝按钮并始终切换为开心
-		if (escapeCount >= maxEscapes) {
-			rejectBtn.style.display = 'none';
-			fleeingEnabled = false;
+        if (escapeCount >= maxEscapes) {
+            rejectBtn.style.display = 'none';
+            fleeingEnabled = false;
 
-			setTimeout(() => {
-				const aRect = acceptBtn.getBoundingClientRect();
-				const centerX = aRect.left + aRect.width / 2;
-				const centerY = aRect.top + aRect.height / 2;
-				handleMouseMove({ clientX: centerX, clientY: centerY });
-				
-				// 固定为标准开心状态
-				face.classList.remove('happy', 'sad');
-				face.classList.add('happy');
-				mouth.style.borderRadius = '0 0 40px 40px';
-				mouth.style.height = '40px';
-				mouth.style.bottom = '40px';
-				cheeks.style.opacity = 1;
-				face.style.background = 'linear-gradient(135deg,#f8d568,#c9e265)';
-
-				face.classList.remove('happy', 'sad');
-				face.classList.add('happy');
-			}, 0); // 延时0毫秒执行
-		}
-
-
+            // 眨眼动画效果
+            const blink = () => {
+                leftEyelid.style.top = rightEyelid.style.top = '0';
+                setTimeout(() => {
+                    leftEyelid.style.top = rightEyelid.style.top = '-100%';
+                }, 150);
+            };
+            
+            // 执行眨眼动画
+            blink();
+            setTimeout(blink, 500);
+            
+            // 固定为标准开心状态
+            setTimeout(() => {
+                // 移除所有表情状态类
+                face.classList.remove('happy', 'sad');
+                // 添加开心状态
+                face.classList.add('happy');
+                
+                // 使用CSS类中定义的开心表情样式
+                mouth.style.borderRadius = '0 0 45px 45px';
+                mouth.style.height = '45px';
+                mouth.style.bottom = '45px';
+                cheeks.style.opacity = '1';
+                
+                // 让腮红显示
+                const cheekElements = document.querySelectorAll('.cheek');
+                cheekElements.forEach(cheek => {
+                    cheek.style.transform = 'scale(1)';
+                });
+                
+                // 设置脸部背景
+                face.style.background = 'linear-gradient(135deg, #f8d568, #c9e265)';
+            }, 0);
+        }
     });
 
-    acceptBtn.addEventListener('click', () => alert('太棒了！你接受了小树的邀请！'));
+    // 添加眨眼效果
+    function blinkEyes() {
+        const leftEyelid = document.getElementById('leftEyelid');
+        const rightEyelid = document.getElementById('rightEyelid');
+        
+        leftEyelid.style.top = rightEyelid.style.top = '0';
+        setTimeout(() => {
+            leftEyelid.style.top = rightEyelid.style.top = '-100%';
+        }, 150);
+    }
+
+    // 定期眨眼
+    setInterval(blinkEyes, 2000 + Math.random() * 2000);
+
+    acceptBtn.addEventListener('click', () => alert('太棒了！你接受了小明的邀请！'));
 </script>
 
 </body>
