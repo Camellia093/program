@@ -1,0 +1,625 @@
+/* 重置样式 */
+.login-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* 登录容器样式 */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  /* 登录卡片样式 */
+  .login-card {
+    position: relative;
+    width: 900px;
+    height: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  /* 表单容器 */
+  .forms-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  /* 登录表单和注册表单共享样式 */
+  .signin-form,
+  .signup-form {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  /* 登录表单位置 */
+  .signin-form {
+    left: 0;
+    z-index: 2;
+  }
+  
+  /* 注册表单位置 */
+  .signup-form {
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+  }
+  
+  /* 顶部切换按钮容器 */
+  .form-tabs {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    padding: 5px;
+    z-index: 10;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  /* 修改登录模式下的切换按钮位置 - 放在左侧面板的右上角 */
+  .login-container:not(.sign-up-mode) .form-tabs {
+    right: 50%;
+    left: auto;
+    transform: translateX(-20px);
+  }
+  
+  .tab-btn {
+    padding: 8px 15px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s;
+  }
+  
+  .tab-btn.active {
+     background: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  
+  /* 标题样式 */
+  .signin-form h2,
+  .signup-form h2 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  /* 输入组样式 */
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+  }
+  
+  .input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .input-group i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* 忘记密码链接 */
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 25px;
+  }
+  
+  .forgot-password a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  
+  .forgot-password a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  
+  /* 按钮样式 */
+  .action-btn {
+    width: 100%;
+    padding: 15px;
+    background: #3b59db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    margin-bottom: 25px;
+  }
+  
+  .action-btn i {
+    margin-left: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .action-btn:hover {
+    background: #2a46c0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(42, 70, 192, 0.3);
+  }
+  
+  .action-btn:hover i {
+    transform: translateX(5px);
+  }
+  
+  /* 社交媒体登录按钮 */
+  .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .social-login p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s;
+  }
+  
+  .social-btn:hover {
+    transform: translateY(-3px);
+  }
+  /* 面板容器 */
+  .panels-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+  }
+  
+  /* 面板共享样式 */
+  .panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 6;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  /* 面板内容 */
+  .panel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 30px;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  }
+  
+  /* 左侧面板 */
+  .left-panel {
+    right: 0;
+    background: linear-gradient(135deg, rgba(59, 89, 219, 0.8), rgba(120, 80, 220, 0.8));
+    transform: translateX(0);
+  }
+  
+  /* 右侧面板 */
+  .right-panel {
+    right: 50%;
+    background: linear-gradient(135deg, rgba(59, 89, 219, 0.8), rgba(120, 80, 220, 0.8));
+    transform: translateX(100%);
+  }
+  
+  /* 火箭图片 */
+  .rocket-image {
+    width: 280px;
+    height: 280px;
+    margin-bottom: 30px;
+    transition: transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.8s ease;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .rocket-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+  }
+  
+  /* 登录标语 */
+  .login-slogan {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 切换按钮 */
+  .toggle-btn {
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .toggle-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* 注册模式样式变化 */
+  .login-container.sign-up-mode .signin-form {
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  .login-container.sign-up-mode .signup-form {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+  }
+  
+  .login-container.sign-up-mode .left-panel {
+    transform: translateX(-100%);
+  }
+  
+  .login-container.sign-up-mode .right-panel {
+    transform: translateX(0);
+  }
+  
+  .login-container.sign-up-mode .left-panel .panel-content {
+    transform: translateX(-35%);
+    opacity: 0;
+  }
+  
+  .login-container.sign-up-mode .right-panel .panel-content {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  /* 修复登录模式下的面板内容显示问题 */
+  .login-container:not(.sign-up-mode) .left-panel .panel-content {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  /* 修改这里：让右侧面板在登录模式下正确显示 */
+  .login-container:not(.sign-up-mode) .right-panel {
+    transform: translateX(0);
+    right: 0;
+  }
+  
+  .login-container:not(.sign-up-mode) .right-panel .panel-content {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .login-container.sign-up-mode .rocket-image {
+    transform: rotate(360deg);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .login-card {
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      min-height: 900px;
+    }
+    
+    .signin-form,
+    .signup-form {
+      width: 100%;
+      padding: 30px;
+    }
+    
+    .panel {
+      width: 100%;
+      height: 35%;
+    }
+    
+    .left-panel {
+      top: 0;
+      transform: translateY(0);
+    }
+    
+    .right-panel {
+      top: 0;
+      transform: translateY(-100%);
+      right: 0;
+    }
+    
+    .rocket-image {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+    }
+    
+    .login-slogan {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    .login-container.sign-up-mode .signin-form {
+      transform: translateY(100%);
+    }
+    
+    .login-container.sign-up-mode .signup-form {
+      transform: translateY(0);
+    }
+    
+    .login-container.sign-up-mode .left-panel {
+      transform: translateY(-100%);
+    }
+    
+    .login-container.sign-up-mode .right-panel {
+      transform: translateY(0);
+    }
+    
+    .form-tabs {
+      /* 隐藏顶部切换按钮 */
+      display: none;
+    }
+    
+    /* 将整个表单容器整体下移，避免上方图片面板遮挡 */
+    .forms-container {
+      top: 260px;              /* 可根据需要调整此值 */
+      height: calc(100% - 150px);
+    }
+    
+    .form-tabs {
+      top: 10px;
+      right: 10px;
+      transition: all 0.6s ease-in-out;
+    }
+    
+    .login-container:not(.sign-up-mode) .form-tabs {
+      right: auto;
+      left: 10px;
+    }
+  }
+  
+  /* 默认情况下，右侧面板显示登录相关内容 */
+  .right-panel .login-content {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: 0.2s;
+  }
+  
+  /* 注册内容默认隐藏 */
+  .right-panel .signup-content {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: 0.2s;
+  }
+  
+  /* 当进入注册模式时，切换显示 */
+  .login-container.sign-up-mode .right-panel .login-content {
+    display: none;
+  }
+  
+  .login-container.sign-up-mode .right-panel .signup-content {
+    display: block;
+  }
+  
+  /* 添加动画效果 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .signin-form h2,
+  .signup-form h2,
+  .input-group,
+  .forgot-password,
+  .action-btn,
+  .social-login {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .signin-form h2,
+  .signup-form h2 {
+    animation-delay: 0.1s;
+  }
+  
+  .input-group:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .input-group:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  
+  .input-group:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  
+  .input-group:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  
+  .forgot-password {
+    animation-delay: 0.6s;
+  }
+  
+  .action-btn {
+    animation-delay: 0.7s;
+  }
+  
+  .social-login {
+    animation-delay: 0.8s;
+  }
+  
+  .rocket-image {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* 分隔线 */
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .divider::before {
+    margin-right: 10px;
+  }
+  
+  .divider::after {
+    margin-left: 10px;
+  }
+  
+  /* 添加顶部切换按钮的过渡效果 */
+  .form-tabs {
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .tab-btn {
+    padding: 8px 15px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tab-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    z-index: -1;
+    border-radius: 30px;
+  }
+  
+  .tab-btn:hover::before {
+    width: 100%;
+  }
+  
+  .tab-btn.active {
+    background: rgba(59, 89, 219, 0.8);
+    box-shadow: 0 4px 10px rgba(59, 89, 219, 0.3);
+    transform: translateY(-1px);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* 添加Vue过渡效果 */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
