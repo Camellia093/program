@@ -24,11 +24,7 @@
                             :disabled="isLoading"
                             @keyup.enter="login"
                         />
-<<<<<<< HEAD
-                        <i class="la la-user"></i>
-=======
                         <i class="fas fa-user"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </div>
 
                     <div class="input-group">
@@ -39,11 +35,7 @@
                             :disabled="isLoading"
                             @keyup.enter="login"
                         />
-<<<<<<< HEAD
-                        <i class="las la-lock"></i>
-=======
                         <i class="fas fa-lock"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </div>
 
                     <div class="remember-forgot">
@@ -61,13 +53,8 @@
                         @click="login"
                         :disabled="isLoading"
                     >
-<<<<<<< HEAD
-                        <span v-if="!isLoading">登录 <i class="las la-arrow-right"></i></span>
-                        <span v-else><i class="las la-spinner la-spin"></i> 登录中...</span>
-=======
                         <span v-if="!isLoading">登录 <i class="fas fa-arrow-right"></i></span>
                         <span v-else><i class="fas fa-spinner fa-spin"></i> 登录中...</span>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </button>
 
                     <div v-if="loginError" class="error-message">
@@ -87,11 +74,7 @@
                             placeholder="用户名"
                             :disabled="isLoading"
                         />
-<<<<<<< HEAD
-                        <i class="la la-user"></i>
-=======
                         <i class="fas fa-user"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </div>
 
                     <div class="input-group">
@@ -101,11 +84,7 @@
                             placeholder="邮箱"
                             :disabled="isLoading"
                         />
-<<<<<<< HEAD
-                        <i class="las la-envelope"></i>
-=======
                         <i class="fas fa-envelope"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </div>
 
                     <div class="input-group">
@@ -115,11 +94,7 @@
                             placeholder="密码"
                             :disabled="isLoading"
                         />
-<<<<<<< HEAD
-                        <i class="las la-lock"></i>
-=======
                         <i class="fas fa-lock"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </div>
 
                     <div class="input-group">
@@ -130,11 +105,8 @@
                             :disabled="isLoading"
                             @keyup.enter="register"
                         />
-<<<<<<< HEAD
-                        <i class="las la-lock"></i>
-=======
                         <i class="fas fa-lock"></i>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
+
                     </div>
 
                     <div class="terms-container">
@@ -147,13 +119,8 @@
                         @click="register"
                         :disabled="isLoading"
                     >
-<<<<<<< HEAD
-                        <span v-if="!isLoading">注册 <i class="las la-arrow-right"></i></span>
-                        <span v-else><i class="las la-spinner la-spin"></i> 注册中...</span>
-=======
                         <span v-if="!isLoading">注册 <i class="fas fa-arrow-right"></i></span>
                         <span v-else><i class="fas fa-spinner fa-spin"></i> 注册中...</span>
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
                     </button>
 
                     <div v-if="registerError" class="error-message">
@@ -334,12 +301,7 @@ function register() {
 </script>
 
 <style>
-<<<<<<< HEAD
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css');
-=======
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
 @import './assets/login.css';
 
 body {
@@ -388,8 +350,5 @@ body {
     outline: none;
     transition: all 0.3s ease;
 }
-<<<<<<< HEAD
+
 </style>        
-=======
-</style>    
->>>>>>> 53a977fa6f1b5a0af25748c5d436885f93c1eb81
