@@ -61,6 +61,7 @@
             width: 100%; 
             display: flex; 
             justify-content: center; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .eye { 
             width: 45px; 
@@ -126,6 +127,7 @@
             box-sizing: border-box; 
             opacity: 0; 
             transition: opacity 0.4s ease; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .cheek { 
             width: 35px; 
@@ -255,7 +257,7 @@
         <p>小明希望你成为ta的对象，是否接受？</p>
         <div class="face-container">
             <div class="face" id="face">
-                <div class="eyes">
+                <div class="eyes" id="eyes">
                     <div class="eye">
                         <div class="eyelid" id="leftEyelid"></div>
                         <div class="pupil" id="leftPupil"></div>
@@ -265,8 +267,8 @@
                         <div class="pupil" id="rightPupil"></div>
                     </div>
                 </div>
-                <div class="mouth"><div class="tooth"></div></div>
-                <div class="cheeks"><div class="cheek"></div><div class="cheek"></div></div>
+                <div class="mouth" id="mouth"><div class="tooth"></div></div>
+                <div class="cheeks" id="cheeks"><div class="cheek"></div><div class="cheek"></div></div>
             </div>
         </div>
         <div class="buttons">
@@ -280,8 +282,9 @@
     const rightPupil = document.getElementById('rightPupil');
     const acceptBtn = document.getElementById('acceptBtn');
     const rejectBtn = document.getElementById('rejectBtn');
-    const mouth = face.querySelector('.mouth');
-    const cheeks = face.querySelector('.cheeks');
+    const mouth = document.getElementById('mouth');
+    const cheeks = document.getElementById('cheeks');
+    const eyes = document.getElementById('eyes');
 
     let rafId = null;
     let fleeingEnabled = false;
@@ -300,7 +303,7 @@
         const a = acceptBtn.getBoundingClientRect();
         const r = rejectBtn.getBoundingClientRect();
 
-        // —— 保留眼球跟随 —— 
+        // 眼球跟随
         const dx = x - (f.left + f.width / 2);
         const dy = y - (f.top + f.height / 2);
         const lim = 12;
@@ -308,17 +311,25 @@
         const mvY = Math.max(-lim, Math.min(lim, dy / 15));
         leftPupil.style.transform = rightPupil.style.transform = `translate(${mvX}px, ${mvY}px)`;
 
-        // —— 先清除“happy”状态 —— 
+        // 五官轻微移动
+        const maxOffset = 5;
+        const offsetX = Math.max(-maxOffset, Math.min(maxOffset, dx / 30));
+        const offsetY = Math.max(-maxOffset, Math.min(maxOffset, dy / 30));
+        eyes.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        mouth.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        cheeks.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+        // 先清除“happy”状态
         face.classList.remove('happy');
 
-        // —— 如果拒绝按钮已隐藏，或鼠标在“接受”按钮上，都始终开心 —— 
+        // 如果拒绝按钮已隐藏，或鼠标在“接受”按钮上，都始终开心
         if (rejectBtn.style.display === 'none' || isInside(x, y, a)) {
-			face.classList.remove("sad");
+            face.classList.remove("sad");
             face.classList.add('happy');
             return;
         }
 
-        // —— 否则，按原逻辑动态调整嘴型和腮红 —— 
+        // 否则，按原逻辑动态调整嘴型和腮红
         const t = Math.max(0, Math.min(1, (x - a.right) / (r.left - a.right)));
         const hf = t, sf = 1 - t;
         mouth.style.borderRadius = `${40 * hf}px ${40 * hf}px ${40 * sf}px ${40 * sf}px`;
@@ -452,3 +463,4 @@
 
 </body>
 </html>
+    
