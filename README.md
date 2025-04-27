@@ -6,9 +6,10 @@ Mini program
 #### 项目目录
 
 ├─ README.md
-│  ├─ Invitations	#表白邀请函文件夹
-│  │  ├─ Invitations.html	#表白邀请函源代码
-│  │  └─ true_love.jpg	#示例图片
+│  ├─ HTML	#HTML相关项目文件夹
+│  │  ├─ Invitations	#表白邀请函文件夹
+│  │  │  ├─ Invitations.html	#表白邀请函源代码
+│  │  │  └─ true_love.jpg	#示例图片
 │  ├─ Vue_Program	#Vue相关项目文件夹
 │  │  ├─ login	#登录页面文件夹
 │  │  │  ├─ Login.vue	#登录页面源代码
@@ -22,7 +23,7 @@ Mini program
 
 
 
-![true_love](.\Invitations\true_love.jpg)
+![true_love](.\HTML\Invitations\true_love.jpg)
 
 
 
