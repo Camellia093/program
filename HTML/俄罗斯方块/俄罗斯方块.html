@@ -14,7 +14,6 @@
         }
         body {
             height: 100vh;
-            background: url(./background_light.jpg);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,6 +28,9 @@
             width: 100%;
             height: 100%;
             background: url(./background_light.jpg);
+			background-size: cover;
+			background-repeat: no-repeat; /* 防止背景图片重复 */
+			background-position: center; /* 让背景图片居中显示 */
             filter: blur(10px); /* 调整模糊程度 */
             z-index: -1;
         }
