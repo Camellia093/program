@@ -10,6 +10,15 @@ Mini program
 │  │  ├─ Invitations	#表白邀请函文件夹
 │  │  │  ├─ Invitations.html	#表白邀请函源代码
 │  │  │  └─ true_love.jpg	#示例图片
+│  │  ├─ Footprint	#鼠标轨迹动画（脚印）
+│  │  │  ├─ footprint.html	#鼠标轨迹源代码（脚印）
+│  │  │  └─ gsap.min.js	#Js文件
+│  │  │  └─ script.js	#逻辑文件
+│  │  ├─ 俄罗斯方块	#俄罗斯方块文件夹
+│  │  │  ├─ 俄罗斯方块.html	#俄罗斯方块源代码
+│  │  │  └─ background_light.jpg	#背景图
+│  │  ├─ minesweeper	#扫雷文件夹
+│  │  │  ├─ minesweeper.html	#扫雷源代码
 │  ├─ Vue_Program	#Vue相关项目文件夹
 │  │  ├─ login	#登录页面文件夹
 │  │  │  ├─ Login.vue	#登录页面源代码
