@@ -7,7 +7,7 @@
   <title>扫雷游戏</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-<style>
+  <style>
     body {
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -16,20 +16,20 @@
       font-family: 'Inter', sans-serif;
     }
 
-	body::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: url(./background.jpg);
-		background-size: cover;
-		background-repeat: no-repeat; /* 防止背景图片重复 */
-		background-position: center; /* 让背景图片居中显示 */
-		filter: blur(7px); /* 调整模糊程度 */
-		z-index: -1;
-	}
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url(./background.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: blur(7px);
+      z-index: -1;
+    }
 
     .cell {
       width: 30px;
@@ -92,8 +92,186 @@
       border-radius: 0.375rem;
       background-color: #f9fafb;
     }
+
+    /* 模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+      z-index: 11; /* 添加 z-index，使其显示在动画层之上 */
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      animation: slideUp 0.3s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-success {
+      border: 2px solid #22c55e;
+    }
+
+    .modal-failure {
+      border: 2px solid #ef4444;
+    }
+
+    .modal-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: scaleIn 0.5s ease-in-out;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-success.title {
+      color: #22c55e;
+    }
+
+    .modal-failure.title {
+      color: #ef4444;
+    }
+
+    .modal-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: spin 1s ease-in-out;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .modal-success.icon {
+      color: #22c55e;
+    }
+
+    .modal-failure.icon {
+      color: #ef4444;
+    }
+
+    .modal-message {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInText 0.8s ease-in-out;
+    }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 游戏结束动画 */
+    .game-over-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .game-over-success {
+      background: rgba(34, 197, 94, 0.3);
+    }
+
+    .game-over-failure {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
+    .game-over-star {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fcd34d;
+      border-radius: 50%;
+      animation: starFall 2s linear infinite;
+    }
+
+    @keyframes starFall {
+      0% {
+        top: -10px;
+        opacity: 1;
+      }
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    .game-over-explosion {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ef4444;
+      border-radius: 50%;
+      animation: explosion 1s ease-out;
+    }
+
+    @keyframes explosion {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
   </style>
-    
 </head>
 
 <body class="flex justify-center items-center h-screen">
@@ -114,6 +292,29 @@
       <button id="reset" class="btn">重置</button>
     </div>
   </div>
+  <!-- 胜利模态框 -->
+  <div id="success-modal" class="modal">
+    <div class="modal-content modal-success">
+      <i class="fa-solid fa-trophy modal-icon icon"></i>
+      <h2 class="modal-title title">恭喜！大获全胜🎉</h2>
+      <p class="modal-message">你以超凡的智慧和敏锐的洞察力成功扫除所有地雷，堪称扫雷大师！</p>
+      <button id="success-close" class="btn">关闭</button>
+      <button id="success-restart" class="btn mt-2">重新开始</button>
+    </div>
+  </div>
+  <!-- 失败模态框 -->
+  <div id="failure-modal" class="modal">
+    <div class="modal-content modal-failure">
+      <i class="fa-solid fa-bomb modal-icon icon"></i>
+      <h2 class="modal-title title">遗憾败北💥</h2>
+      <p class="modal-message">很可惜，你不小心触发了地雷。不过别气馁，总结经验，下次一定能成功！</p>
+      <button id="failure-close" class="btn">关闭</button>
+      <button id="failure-restart" class="btn mt-2">重新开始</button>
+    </div>
+  </div>
+  <!-- 游戏结束动画 -->
+  <div id="game-over-success" class="game-over-animation game-over-success"></div>
+  <div id="game-over-failure" class="game-over-animation game-over-failure"></div>
   <script>
     let rows, cols, mines;
     let board = [];
@@ -126,6 +327,14 @@
     const resetButton = document.getElementById('reset');
     const difficultySelect = document.getElementById('difficulty');
     const startButton = document.getElementById('start');
+    const successModal = document.getElementById('success-modal');
+    const failureModal = document.getElementById('failure-modal');
+    const successCloseButton = document.getElementById('success-close');
+    const failureCloseButton = document.getElementById('failure-close');
+    const gameOverSuccess = document.getElementById('game-over-success');
+    const gameOverFailure = document.getElementById('game-over-failure');
+    const successRestartButton = document.getElementById('success-restart');
+    const failureRestartButton = document.getElementById('failure-restart');
 
     function setDifficulty() {
       const difficulty = difficultySelect.value;
@@ -273,7 +482,8 @@
         // 游戏失败
         gameOver = true;
         showAllMines();
-        alert('游戏失败！');
+        failureModal.style.display = 'flex';
+        showGameOverFailureAnimation();
         return;
       }
 
@@ -290,7 +500,8 @@
         // 游戏胜利
         gameOver = true;
         showAllMines();
-        alert('游戏胜利！');
+        successModal.style.display = 'flex';
+        showGameOverSuccessAnimation();
       }
 
       drawBoard();
@@ -349,6 +560,30 @@
       setDifficulty();
       createBoard();
       drawBoard();
+      successModal.style.display = 'none';
+      failureModal.style.display = 'none';
+      gameOverSuccess.style.display = 'none';
+      gameOverFailure.style.display = 'none';
+    }
+
+    function showGameOverSuccessAnimation() {
+      gameOverSuccess.style.display = 'flex';
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.classList.add('game-over-star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        gameOverSuccess.appendChild(star);
+      }
+    }
+
+    function showGameOverFailureAnimation() {
+      gameOverFailure.style.display = 'flex';
+      const explosion = document.createElement('div');
+      explosion.classList.add('game-over-explosion');
+      explosion.style.left = '50%';
+      explosion.style.top = '50%';
+      gameOverFailure.appendChild(explosion);
     }
 
     // 初始化游戏
@@ -358,6 +593,16 @@
 
     startButton.addEventListener('click', resetGame);
     resetButton.addEventListener('click', resetGame);
+    successCloseButton.addEventListener('click', () => {
+      successModal.style.display = 'none';
+      gameOverSuccess.style.display = 'none';
+    });
+    failureCloseButton.addEventListener('click', () => {
+      failureModal.style.display = 'none';
+      gameOverFailure.style.display = 'none';
+    });
+    successRestartButton.addEventListener('click', resetGame);
+    failureRestartButton.addEventListener('click', resetGame);
   </script>
 </body>
 
