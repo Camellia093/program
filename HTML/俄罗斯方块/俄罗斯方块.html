@@ -141,11 +141,11 @@
         <!-- 操作手册 -->
         <div class="manual">
             <h3>操作手册</h3>
-            <p>1. 使用方向键控制方块移动：</p>
-            <p>   - 左方向键：向左移动</p>
-            <p>   - 右方向键：向右移动</p>
-            <p>   - 下方向键：向下移动</p>
-            <p>   - 上方向键：旋转方块</p>
+            <p>1. 使用方向键或 WASD 键控制方块移动：</p>
+            <p>   - 左方向键或 A 键：向左移动</p>
+            <p>   - 右方向键或 D 键：向右移动</p>
+            <p>   - 下方向键或 S 键：向下移动</p>
+            <p>   - 上方向键或 W 键：旋转方块</p>
             <p>2. 目标是将方块填满一行，填满后该行将消除，获得分数。</p>
             <p>3. 当方块堆积到顶部时，游戏结束。</p>
         </div>
@@ -287,15 +287,19 @@
             document.addEventListener('keydown', function(event){
                 switch(event.keyCode){
                     case 38: 
+                    case 87: 
                         rotate();
                         break;
                     case 39: 
+                    case 68: 
                         move(1, 0);
                         break;
                     case 40: 
+                    case 83: 
                         move(0, 1);
                         break;
                     case 37: 
+                    case 65: 
                         move(-1, 0);
                         break;
                 }
@@ -501,5 +505,4 @@
     </script>
 
 </body>
-</html>
-    
+</html>    
