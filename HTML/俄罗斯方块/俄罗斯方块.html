@@ -148,6 +148,8 @@
             <p>   - 上方向键或 W 键：旋转方块</p>
             <p>2. 目标是将方块填满一行，填满后该行将消除，获得分数。</p>
             <p>3. 当方块堆积到顶部时，游戏结束。</p>
+            <p>4. 按空格键暂停/继续游戏。</p>
+            <p>5. 一次性消除多行有额外奖励。</p>
         </div>
     </div>
 
@@ -229,6 +231,9 @@
         /* 变量，16宫格的位置 */
         var currentX = 0 , currentY = 0;
 
+        /* 新增：游戏暂停状态 */
+        var isPaused = false;
+
         /* 根据模型数据源来创建块元素 */         
         function createModel() {
             /* 判断满足游戏结束条件没 */
@@ -285,6 +290,11 @@
         /* 用户点击键盘事件 */       
         function onKeyDown(){
             document.addEventListener('keydown', function(event){
+                if (event.keyCode === 32) { // 空格键
+                    togglePause();
+                    return;
+                }
+                if (isPaused) return; // 游戏暂停时，忽略其他按键
                 switch(event.keyCode){
                     case 38: 
                     case 87: 
@@ -304,6 +314,16 @@
                         break;
                 }
             })
+        }
+
+        /* 新增：切换游戏暂停状态 */
+        function togglePause() {
+            isPaused =!isPaused;
+            if (isPaused) {
+                clearInterval(mInterval);
+            } else {
+                autoDown();
+            }
         }
 
         /* 移动函数 */       
@@ -407,6 +427,7 @@
 
         /* 判断一行是否被铺满 */
         function isRemoveLine(){
+            let linesToRemove = [];
             /* 判断某行中，每一列是否都存在块元素，是则清理 */
             /* 遍历所有行所有列 */
             for(var i = 0; i < ROW_COUNT; i++){
@@ -421,8 +442,18 @@
                 }
                 /* 当某行铺满,flag==true */
                 if(flag){
-                    removeLine(i);
+                    linesToRemove.push(i);
                 }
+            }
+            // 处理要消除的行
+            for (let line of linesToRemove) {
+                removeLine(line);
+            }
+            // 根据消除的行数计算奖励分数
+            if (linesToRemove.length > 1) {
+                let bonus = (linesToRemove.length - 1) * 10; // 额外奖励，每多消除一行多10分
+                marks += bonus;
+                mark.innerHTML = "分数：" + marks ;
             }
         }
 
@@ -464,6 +495,7 @@
             if(mInterval){
                 clearInterval(mInterval);
             }
+            if (isPaused) return; // 游戏暂停时，不启动定时器
             mInterval = setInterval(function(){
                 move(0, 1);
             }, 500)
@@ -505,4 +537,5 @@
     </script>
 
 </body>
-</html>    
+</html>
+    
