@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,12 @@
     <title>俄罗斯方块</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             height: 100vh;
             display: flex;
@@ -34,16 +36,17 @@
             filter: blur(10px);
             z-index: -1;
         }
-        .container{
+
+        .container {
             position: relative;
             width: 280px;
             height: 504px;
-            box-shadow: 0 0 5px rgb(218, 218, 218),
-            0 0 10px rgb(151, 151, 151);
+            box-shadow: 0 0 5px rgb(218, 218, 218), 0 0 10px rgb(151, 151, 151);
             backdrop-filter: blur(3px);
-            background-color: rgba(0, 0, 0,.2);
+            background-color: rgba(0, 0, 0, .2);
         }
-        .mark{
+
+        .mark {
             font-family: 'fangsong';
             position: absolute;
             height: 50px;
@@ -56,7 +59,8 @@
             font-size: 27px;
             user-select: none;
         }
-        .again{
+
+        .again {
             font-family: 'fangsong';
             position: absolute;
             height: 30px;
@@ -72,9 +76,11 @@
             user-select: none;
             display: none;
         }
-        .again:hover{
+
+        .again:hover {
             background-color: rgb(21, 168, 29);
         }
+
         .start-game {
             font-family: 'fangsong';
             position: absolute;
@@ -90,32 +96,35 @@
             border-radius: 5px;
             user-select: none;
         }
-        .start-game:hover{
+
+        .start-game:hover {
             background-color: rgb(21, 168, 29);
         }
-        .kuai{
+
+        .kuai {
             position: absolute;
             width: 28px;
             height: 28px;
         }
-        .ding{
+
+        .ding {
             position: absolute;
             width: 28px;
             height: 28px;
             background-color: rgb(243, 243, 243);
         }
-        h1{
+
+        h1 {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             font-size: 100px;
             font-family: 'fangsong';
             color: rgb(1, 175, 255);
-            text-shadow: 0 0 10px rgb(1, 175, 255),
-            0 0 15px rgb(1, 175, 255),
-            0 0 20px rgb(1, 175, 255);
+            text-shadow: 0 0 10px rgb(1, 175, 255), 0 0 15px rgb(1, 175, 255), 0 0 20px rgb(1, 175, 255);
         }
+
         /* 操作手册样式 */
         .manual {
             position: absolute;
@@ -130,8 +139,71 @@
             font-family: 'fangsong';
             font-size: 14px;
         }
+
+        /* 暂停提示样式 */
+        .pause-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .pause-content {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            font-family: 'fangsong';
+            font-size: 24px;
+            text-align: center;
+        }
+
+        /* 游戏结束模态框样式 */
+        .game-over-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .game-over-content {
+            background-color: #e74c3c;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            font-family: 'fangsong';
+            font-size: 32px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="container" id="container">
@@ -142,14 +214,25 @@
         <div class="manual">
             <h3>操作手册</h3>
             <p>1. 使用方向键或 WASD 键控制方块移动：</p>
-            <p>   - 左方向键或 A 键：向左移动</p>
-            <p>   - 右方向键或 D 键：向右移动</p>
-            <p>   - 下方向键或 S 键：向下移动</p>
-            <p>   - 上方向键或 W 键：旋转方块</p>
+            <p> - 左方向键或 A 键：向左移动</p>
+            <p> - 右方向键或 D 键：向右移动</p>
+            <p> - 下方向键或 S 键：向下移动</p>
+            <p> - 上方向键或 W 键：旋转方块</p>
             <p>2. 目标是将方块填满一行，填满后该行将消除，获得分数。</p>
             <p>3. 当方块堆积到顶部时，游戏结束。</p>
             <p>4. 按空格键暂停/继续游戏。</p>
             <p>5. 一次性消除多行有额外奖励。</p>
+        </div>
+    </div>
+    <!-- 暂停提示模态框 -->
+    <div class="pause-modal" id="pause-modal">
+        <div class="pause-content">游戏暂停</div>
+    </div>
+    <!-- 游戏结束模态框 -->
+    <div class="game-over-modal" id="game-over-modal">
+        <div class="game-over-content">
+            <p>游戏结束！</p>
+            <p>你的分数是：<span id="game-over-score"></span></p>
         </div>
     </div>
 
@@ -162,13 +245,16 @@
         var again = document.querySelector(".again");
         var startGame = document.querySelector('.start-game');
         var manual = document.querySelector('.manual');
+        var pauseModal = document.getElementById('pause-modal');
+        var gameOverModal = document.getElementById('game-over-modal');
+        var gameOverScore = document.getElementById('game-over-score');
 
         /* 常量，不可修改 */
         /* 一次走的距离 */
         var STEP = 28;
 
         /* 容器一共18行，10列 */
-        var ROW_COUNT = 18 , COL_COUNT = 10;
+        var ROW_COUNT = 18, COL_COUNT = 10;
 
         /* 记录所有出现的块元素的位置 k=行_列 ：v=块元素 */
         var fixedBlocks = {}
@@ -226,18 +312,25 @@
             }
         ];
 
-        /* 变量，当前使用的模型 */  
-        var currentModel = {} 
+        /* 变量，当前使用的模型 */
+        var currentModel = {}
         /* 变量，16宫格的位置 */
-        var currentX = 0 , currentY = 0;
+        var currentX = 0, currentY = 0;
 
         /* 新增：游戏暂停状态 */
         var isPaused = false;
+        // 新增：游戏是否开始的状态
+        var isGameStarted = false;
+        // 新增：游戏是否结束的状态
+        var isGameEnded = false;
 
-        /* 根据模型数据源来创建块元素 */         
+        // 新增：用于存储所有定时器 ID 的数组
+        var timerIds = [];
+
+        /* 根据模型数据源来创建块元素 */
         function createModel() {
             /* 判断满足游戏结束条件没 */
-            if(isGameOver()){
+            if (isGameOver()) {
                 gameOver();
                 return;
             }
@@ -247,10 +340,10 @@
             currentX = 3;
             currentY = 0;
             /* 来个随机颜色 */
-            let color = new Array("#FF1493","#FF00FF","#0000FF","#1E90FF","#00FFFF","#00FF7F","#00FF00","#FFFF00","#FF6600");
+            let color = new Array("#FF1493", "#FF00FF", "#0000FF", "#1E90FF", "#00FFFF", "#00FF7F", "#00FF00", "#FFFF00", "#FF6600");
             let yanse = color[Math.floor(Math.random() * color.length)];
             /* 遍历对象，生成数量的块元素 */
-            for(var key in currentModel){
+            for (var key in currentModel) {
                 var divKuai = document.createElement("div");
                 divKuai.className = "kuai";
                 divKuai.style.cssText = `box-shadow: inset 0 0 5px ${yanse},
@@ -266,12 +359,12 @@
         }
 
         /* 根据创建好的块元素给他定位位置，生成相应的模型 */
-        function locationBlocks(){
+        function locationBlocks() {
             /* 判断越界 */
             checkBound();
             /* 得到当前所有块元素 */
             var blocks = document.getElementsByClassName("kuai");
-            for(var i = 0; i < blocks.length; i++ ){
+            for (var i = 0; i < blocks.length; i++) {
                 /* 每个块元素 */
                 var oneBlock = blocks[i];
                 /* 得到每个块元素的坐标,16宫格位置加上本身相对16宫格位置 */
@@ -282,34 +375,37 @@
         }
 
         /*  入口方法 */
-        function rukou (){
+        function rukou() {
+            isGameStarted = true;
             onKeyDown();
             createModel();
         }
 
-        /* 用户点击键盘事件 */       
-        function onKeyDown(){
-            document.addEventListener('keydown', function(event){
+        /* 用户点击键盘事件 */
+        function onKeyDown() {
+            document.addEventListener('keydown', function (event) {
                 if (event.keyCode === 32) { // 空格键
-                    togglePause();
+                    if (isGameStarted &&!isGameEnded) {
+                        togglePause();
+                    }
                     return;
                 }
-                if (isPaused) return; // 游戏暂停时，忽略其他按键
-                switch(event.keyCode){
-                    case 38: 
-                    case 87: 
+                if (isPaused ||!isGameStarted || isGameEnded) return; // 游戏暂停、未开始或已结束时，忽略其他按键
+                switch (event.keyCode) {
+                    case 38:
+                    case 87:
                         rotate();
                         break;
-                    case 39: 
-                    case 68: 
+                    case 39:
+                    case 68:
                         move(1, 0);
                         break;
-                    case 40: 
-                    case 83: 
+                    case 40:
+                    case 83:
                         move(0, 1);
                         break;
-                    case 37: 
-                    case 65: 
+                    case 37:
+                    case 65:
                         move(-1, 0);
                         break;
                 }
@@ -320,18 +416,20 @@
         function togglePause() {
             isPaused =!isPaused;
             if (isPaused) {
-                clearInterval(mInterval);
+                clearAllTimers();
+                pauseModal.style.display = 'flex';
             } else {
                 autoDown();
+                pauseModal.style.display = 'none';
             }
         }
 
-        /* 移动函数 */       
-        function move(x, y){
+        /* 移动函数 */
+        function move(x, y) {
             /* 判断触碰，就是判断活动中的模型将要移动到的位置是否存在已经固定的模型（块元素） */
-            if(isMeet(currentX + x, currentY + y, currentModel)){
+            if (isMeet(currentX + x, currentY + y, currentModel)) {
                 /* 若发生触碰，且由y轴引起，那么说明模型的底部发生触碰了，那么该停下了 */
-                if(y!==0){
+                if (y!== 0) {
                     fixedBottomModel();
                 }
                 /* 直接return掉move方法，不再执行 */
@@ -344,12 +442,12 @@
         }
 
         /* 旋转模型函数 */
-        function rotate(){
+        function rotate() {
             // 克隆一下 currentModel  用引入的js文件里的方法
             var cloneCurrentModel = _.cloneDeep(currentModel);
             /* 算法：移动后的行=移动前的列  移动后的列=3-移动前的行 */
             /* 得到当前使用的模型数据源里的块元素的坐标 */
-            for(var key in cloneCurrentModel){
+            for (var key in cloneCurrentModel) {
                 var blocksModel = cloneCurrentModel[key];
                 /* 实现算法进行变换 */
                 let temp = blocksModel.row;
@@ -357,33 +455,32 @@
                 blocksModel.col = 3 - temp;
             }
             /* 判断触碰，就是判断活动中的模型将转的地方是否存在已经固定的模型（块元素） */
-            if(isMeet(currentX, currentY, cloneCurrentModel)){
+            if (isMeet(currentX, currentY, cloneCurrentModel)) {
                 return;
             }
             /* 接收了这次旋转 */
-            currentModel = cloneCurrentModel; 
+            currentModel = cloneCurrentModel;
 
             locationBlocks();
         }
 
         /* 控制模型只能在游戏区域里移动 */
-        function checkBound(){
+        function checkBound() {
             /* 模型可活动的边界 */
             var leftBound = 0, rightBound = COL_COUNT, bottomBound = ROW_COUNT;
             /* 当块元素超出边界后，让16宫格退一步，这样一走一退相互抵消 */
-            for(var key in currentModel){
+            for (var key in currentModel) {
                 var blocksModel = currentModel[key];
                 /* 左侧边界 */
-                if((blocksModel.col + currentX) < leftBound)
-                {
+                if ((blocksModel.col + currentX) < leftBound) {
                     currentX++;
                 }
                 /* 右侧边界 */
-                if((blocksModel.col + currentX) >= rightBound){
+                if ((blocksModel.col + currentX) >= rightBound) {
                     currentX--;
                 }
                 /* 底侧边界 */
-                if((blocksModel.row + currentY) >= bottomBound){
+                if ((blocksModel.row + currentY) >= bottomBound) {
                     currentY--;
                     /* 固定在底部 */
                     fixedBottomModel();
@@ -392,11 +489,11 @@
         }
 
         /* 当模型到达底部时固定在底部 */
-        function fixedBottomModel(){
+        function fixedBottomModel() {
             /* 1.改变模型颜色样式 */
             var activityModels = document.getElementsByClassName("kuai");
             /* 因为js特效，要从后往前遍历 */
-            for(var i = activityModels.length - 1; i >= 0; i--){
+            for (var i = activityModels.length - 1; i >= 0; i--) {
                 var activityModel = activityModels[i];
                 /* 让其不再移动，改变类名就行，这样位置函数将对其无效了 */
                 activityModel.className = "ding";
@@ -413,12 +510,12 @@
 
         /* 判断模型之间的触碰问题 */
         /* x，y为16宫格将要去到的位置，model表示当前模型将要完成的变化 */
-        function isMeet(x, y, model){
+        function isMeet(x, y, model) {
             /* 判断触碰，就是判断活动中的模型将要移动到的位置是否存在已经固定的模型（块元素） */
             /* 该位置是否存在块元素？ 只有一个return会生效*/
-            for(var k in model) {
+            for (var k in model) {
                 var blockModel = model[k];
-                if(fixedBlocks[(y + blockModel.row) + "_" + (x + blockModel.col)]){
+                if (fixedBlocks[(y + blockModel.row) + "_" + (x + blockModel.col)]) {
                     return true;
                 }
             }
@@ -426,22 +523,22 @@
         }
 
         /* 判断一行是否被铺满 */
-        function isRemoveLine(){
+        function isRemoveLine() {
             let linesToRemove = [];
             /* 判断某行中，每一列是否都存在块元素，是则清理 */
             /* 遍历所有行所有列 */
-            for(var i = 0; i < ROW_COUNT; i++){
+            for (var i = 0; i < ROW_COUNT; i++) {
                 /* 假设当前行铺满，设flag=true */
                 var flag = true;
-                for(var j = 0; j < COL_COUNT; j++){
+                for (var j = 0; j < COL_COUNT; j++) {
                     /* 当前行没铺满 */
-                    if(!fixedBlocks[i + "_" + j]){
+                    if (!fixedBlocks[i + "_" + j]) {
                         flag = false;
                         break;
                     }
                 }
                 /* 当某行铺满,flag==true */
-                if(flag){
+                if (flag) {
                     linesToRemove.push(i);
                 }
             }
@@ -453,14 +550,14 @@
             if (linesToRemove.length > 1) {
                 let bonus = (linesToRemove.length - 1) * 10; // 额外奖励，每多消除一行多10分
                 marks += bonus;
-                mark.innerHTML = "分数：" + marks ;
+                mark.innerHTML = "分数：" + marks;
             }
         }
 
         /* 清理被铺满的一行 */
-        function removeLine(line){
+        function removeLine(line) {
             /* 删除该行的块元素 */
-            for(var i = 0; i < COL_COUNT; i++){
+            for (var i = 0; i < COL_COUNT; i++) {
                 document.getElementById("container").removeChild(fixedBlocks[line + "_" + i]);
                 /* 数据源也删除 */
                 fixedBlocks[line + "_" + i] = null;
@@ -468,16 +565,16 @@
             downLine(line);
             /* 加分数 */
             marks += 10;
-            mark.innerHTML = "分数：" + marks ;
+            mark.innerHTML = "分数：" + marks;
         }
 
         /* 被清理行上面的块元素下落 */
-        function downLine(line){
+        function downLine(line) {
             /* 遍历被清理行上的所有行 */
-            for(var i = line - 1; i >= 0; i--){
+            for (var i = line - 1; i >= 0; i--) {
                 /* 该行的所有列 */
-                for(var j = 0; j < COL_COUNT; j++){
-                    if(!fixedBlocks[i + "_" + j]) continue;
+                for (var j = 0; j < COL_COUNT; j++) {
+                    if (!fixedBlocks[i + "_" + j]) continue;
                     /* 被清理行上面的块元素数据源所在行数+1 */
                     fixedBlocks[(i + 1) + "_" + j] = fixedBlocks[i + "_" + j];
                     /* 让块元素下落 */
@@ -491,38 +588,55 @@
         /* 模型自动下落 */
         var mInterval = null;
 
-        function autoDown(){
-            if(mInterval){
+        function autoDown() {
+            if (mInterval) {
                 clearInterval(mInterval);
+                // 从定时器 ID 数组中移除该定时器 ID
+                var index = timerIds.indexOf(mInterval);
+                if (index!== -1) {
+                    timerIds.splice(index, 1);
+                }
             }
             if (isPaused) return; // 游戏暂停时，不启动定时器
-            mInterval = setInterval(function(){
+            mInterval = setInterval(function () {
                 move(0, 1);
-            }, 500)
+            }, 500);
+            // 将新的定时器 ID 添加到数组中
+            timerIds.push(mInterval);
         }
 
         /* 判断游戏结束 */
-        function isGameOver(){
+        function isGameOver() {
             /* 第0行也有元素时结束游戏 */
-            for(var i = 0; i < COL_COUNT; i++){
-                if(fixedBlocks["0_" + i]){
+            for (var i = 0; i < COL_COUNT; i++) {
+                if (fixedBlocks["0_" + i]) {
                     return true;
                 }
             }
             return false;
         }
+
+        // 新增：清除所有定时器的函数
+        function clearAllTimers() {
+            timerIds.forEach(function(id) {
+                clearInterval(id);
+            });
+            timerIds = [];
+        }
+
         /* 结束游戏 */
-        function gameOver(){
-            /* 停止定时器 */
-            if(mInterval){
-                clearInterval(mInterval);
-            }
-            /* 弹出对话框 */
-            alert("游戏结束!   分数为：" + marks + "。");
+        function gameOver() {
+            if (isGameEnded) return; // 如果游戏已经结束，直接返回
+            isGameEnded = true;
+            // 清除所有定时器
+            clearAllTimers();
+            // 显示游戏结束模态框
+            gameOverScore.textContent = marks;
+            gameOverModal.style.display = 'flex';
         }
 
         /* 点击开始游戏 */
-        startGame.addEventListener('click', function() {
+        startGame.addEventListener('click', function () {
             startGame.style.display = 'none';
             again.style.display = 'block';
             manual.style.display = 'none';
@@ -530,12 +644,31 @@
         });
 
         /* 点击再来一局 */
-        again.addEventListener('click', function(){
+        again.addEventListener('click', function () {
             /* 简单粗暴直接刷新好吧 */
-            location.reload(true);   
+            location.reload(true);
         })
-    </script>
 
+        // 监听页面焦点变化事件
+        window.addEventListener('blur', function () {
+            if (isGameStarted &&!isPaused &&!isGameEnded) {
+                togglePause();
+            }
+        });
+
+        window.addEventListener('focus', function () {
+            if (isPaused && isGameStarted &&!isGameEnded) {
+                togglePause();
+            }
+        });
+
+        // 点击空白处关闭游戏结束模态框
+        gameOverModal.addEventListener('click', function (event) {
+            if (event.target === gameOverModal) {
+                gameOverModal.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
     
