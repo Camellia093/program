@@ -85,6 +85,23 @@
             }
         }
 
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(50vh) translateX(100px) rotate(180deg);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* 夏季特效 */
         .summer {
             background: linear-gradient(to bottom, #87ceeb, #e0f7fa);
@@ -459,5 +476,4 @@
     </script>
 </body>
 
-</html>
-    
+</html>    
