@@ -19,6 +19,8 @@ Mini program
 │  │  ├─ minesweeper	#扫雷文件夹
 │  │  │  ├─ minesweeper.html	#扫雷源代码
 │  │  │  └─ background.jpg	#背景图
+│  │  ├─ seasons	#四季特效文件夹
+│  │  │  ├─ seasons.html	#四季特效源代码
 │  ├─ Vue_Program	#Vue相关项目文件夹
 │  │  ├─ login	#登录页面文件夹
 │  │  │  ├─ Login.vue	#登录页面源代码
@@ -26,6 +28,7 @@ Mini program
 │  │  ├─ true_love.jpg	#对象邀请函
 │  │  ├─  minesweeper.jpg	#扫雷示例图
 │  │  ├─ enroll.jpg	#注册页面示例图
+│  │  ├─ seasons.jpg	#四季特效示例图
 │  │  └─ Login.jpg	#登录页面示例图
 
 
@@ -87,3 +90,9 @@ Mini program
 
 
 ![俄罗斯方块](.\images\俄罗斯方块.png)
+
+
+
+### ✨四季特效
+
+![seasons](.\images\seasons.jpg)
