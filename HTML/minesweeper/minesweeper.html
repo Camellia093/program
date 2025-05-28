@@ -429,7 +429,7 @@
               e.preventDefault();
               toggleFlag(i, j);
             });
-            cell.addEventListener('dblclick', () => doubleClickCell(i, j));
+            cell.addEventListener('click', () => doubleClickCell(i, j));
           }
 
           if (board[i][j].isRevealed) {
