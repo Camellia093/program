@@ -1,0 +1,339 @@
+/* 容器样式 */
+.timeline-container {
+    width: 70%;
+    padding: 1rem 1rem;
+    margin: 1rem auto;
+    margin-left: 280px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px; /* 圆角边框 */
+    grid-column: 1 / -1;
+  }
+  
+  /* 深色模式下的 .timeline-container 样式 */
+  html.dark .timeline-container {
+    width: 70%;
+    padding: 1rem 1rem;
+    margin-left: 280px;
+    background-color: hsla(200, 20%, 10%, 0.4); /* 深色半透明磨砂背景 */
+    color: #e0e0e0; /* 文本颜色为浅灰色 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 添加轻微的阴影，增强层次感 */
+    -webkit-backdrop-filter: blur(5px); /* 兼容旧版浏览器 */
+    grid-column: 1 / -1;
+  }
+  
+  /* 文章列表样式 */
+  .article-list {
+    margin-top: 10px;
+  }
+  
+  .article-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+  }
+  
+  .article-item:last-child {
+    border-bottom: none;
+  }
+  
+  .article-item:hover {
+    background-color:rgba(244, 248, 243, 0.5);
+    transition: background-color 0.3s ease;
+    border-radius: 16px;
+  }
+  
+  html.dark .article-item:hover {
+    background-color:rgba(244, 248, 243, 0.2);
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* 索引样式 - 默认状态 */
+  .index-container {
+    position: absolute;
+    margin: 1rem auto;
+    top: 500px;
+    left: 7%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    width: 180px; /* 固定宽度 */
+  }
+  
+  /* 索引固定状态：滚动到一定距离后，索引框固定在距离顶部50px */
+  .index-container.fixed {
+    position: fixed;
+    top: 80px; /* 固定在距离顶部80px */
+    left: 7%;
+    width: 180px;
+    /* 固定状态下加深阴影，提升层级感 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* 深色模式下的默认索引样式 */
+  html.dark .index-container {
+    position: absolute;
+    top: 500px;
+    left: 7%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(51, 51, 51, 0.5);
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    width: 180px;
+  }
+  
+  /* 深色模式下的固定索引样式 */
+  html.dark .index-container.fixed {
+    position: fixed;
+    top: 80px;
+    left: 7%;
+    width: 180px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .index-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .index-container li {
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .index-container li:hover {
+    background:rgba(233, 236, 239, 0.61);
+  }
+  
+  html.dark .index-container li.active {
+    font-weight: bold;
+    border-radius: 9px;
+    background: rgba(197, 197, 197, 0.2);
+  }
+  
+  .index-container li.active {
+    font-weight: bold;
+    border-radius: 9px;
+    background: #d1ecf1; /* 高亮当前年份 */
+  }
+  
+  /* 时间样式 */
+  .article-item time {
+    display: block;
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  /* 文章标题增加缩进效果 */
+  .article-item h3 {
+    margin-left: 20px; /* 缩进20px */
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  /* 深色模式下的样式 */
+  html.dark .article-item h3 {
+    color:rgb(214, 214, 214); /* 深色模式下文字颜色 */
+    padding: 5px 10px; /* 添加背景颜色时的内边距 */
+    line-height: 1.5;
+    font-size: 1.2rem;
+    margin-left: 20px; /* 缩进20px */
+    border-radius: 8px; /* 添加圆角效果 */
+  }
+  
+  /* 年份标题 */
+  .year-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: background 0.3s;
+  
+    .toggle-icon {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+  }
+  
+  /* 深色模式下的 .month-card 基础样式 */
+  html.dark .month-card {
+    margin: 1rem 0;
+    padding: 1.5rem;
+    background: rgba(30, 30, 30, 0.8); /* 半透明深色背景 */
+    color: #ffffff; /* 文本颜色为白色 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); /* 深色阴影 */
+    backdrop-filter: blur(5px); /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(5px); /* 兼容旧版浏览器 */
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* 深色模式下的 .month-card 春季样式 */
+  html.dark .month-card.spring {
+    background: linear-gradient(145deg, rgba(40, 56, 7, 0.7), rgba(51, 97, 5, 0.1)); /* 半透明深绿色背景 */
+  }
+  
+  /* 深色模式下的 .month-card 夏季样式 */
+  html.dark .month-card.summer {
+    background: linear-gradient(145deg, rgba(66, 11, 11, 0.7), rgba(100, 3, 3, 0.1)); /* 半透明深蓝色背景 */
+  }
+  
+  /* 深色模式下的 .month-card 秋季样式 */
+  html.dark .month-card.autumn {
+    background: linear-gradient(145deg, rgba(65, 37, 9, 0.7), rgba(102, 46, 3, 0.1)); /* 半透明深橙色背景 */
+  }
+  
+  /* 深色模式下的 .month-card 冬季样式 */
+  html.dark .month-card.winter {
+    background: linear-gradient(145deg, rgba(10, 37, 65, 0.7), rgba(50, 79, 110, 0.1)); /* 半透明深蓝色背景 */
+  }
+  
+  /* 深色模式下的悬停效果 */
+  html.dark .month-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 深色悬停阴影 */
+    border-color: rgba(80, 80, 80, 0.1); /* 深色边框 */
+  }
+  /* 月份卡片 */
+  .month-card {
+    background: #fff;
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border-radius: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  
+    &.spring {
+      background: linear-gradient(145deg, rgba(240,244,195,0.8), rgba(200,230,201,0.1));
+    }
+    
+    &.summer {
+      background: linear-gradient(145deg, rgba(179,229,252,0.8), rgba(129,212,250,0.1));
+    }
+    
+    &.autumn {
+      background: linear-gradient(145deg, rgba(255,204,128,0.8), rgba(255,171,145,0.1));
+    }
+    
+    &.winter {
+      background: linear-gradient(145deg, rgba(227,242,253,0.8), rgba(187,222,251,0.1));
+    }
+    
+  
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  /* 过渡动画 */
+  .slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+  }
+  
+  .slide-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  
+  .slide-fade-enter-from,
+  .slide-fade-leave-to {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  
+  .month-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .season-badge {
+    background-color: #f0f0f0;
+    color: #666;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    /* 隐藏索引 */
+    html.dark .index-container,
+    .index-container {
+        display: none;
+    }
+  
+    /* 通用字体大小调整 */
+    html {
+        font-size: 14px;
+    }
+  
+    /* 容器样式调整 */
+    html.dark .timeline-container,
+    .timeline-container {
+        width: 90%; /* 自适应宽度，避免溢出 */
+        padding: 1rem 0.5rem; /* 减小内边距 */
+        margin: 1rem auto; /* 减小外边距 */
+    }
+  
+    /* 年份标题调整 */
+    .year-header {
+        padding: 0.8rem; /* 减小内边距 */
+        gap: 0.5rem; /* 减小间距 */
+        font-size: 0.9rem; /* 减小字体大小 */
+    }
+  
+    /* 月份卡片调整 */
+    html.dark .month-card,
+    .month-card {
+        margin: 0.5rem 0; /* 减小外边距 */
+        padding: 1rem; /* 减小内边距 */
+        border-radius: 8px; /* 减小圆角 */
+        font-size: 0.9rem; /* 减小字体大小 */
+  
+        &:hover {
+            transform: translateX(5px); /* 减小平移距离 */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 减小阴影强度 */
+        }
+    }
+  
+    /* 文章列表调整 */
+    .article-list {
+        font-size: 0.8rem; /* 减小字体大小 */
+    }
+  
+    /* 调整月份标题和季节徽章 */
+    .month-title {
+        font-size: 0.9rem; /* 减小字体大小 */
+    }
+  
+    .season-badge {
+        font-size: 0.7rem; /* 减小徽章字体大小 */
+    }
+  
+    /* 确保过渡动画在小屏幕上不会过于突兀 */
+    .slide-fade-enter-active {
+        transition: all 0.2s ease-out; /* 减小动画时间 */
+    }
+  
+    .slide-fade-leave-active {
+        transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1); /* 减小动画时间 */
+    }
+  }
