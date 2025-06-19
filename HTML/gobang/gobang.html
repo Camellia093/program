@@ -47,6 +47,9 @@
                 transform: translateY(-2px);
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             }
+            .modal-transition {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
         }
     </style>
 </head>
@@ -131,8 +134,8 @@
     </div>
 
     <!-- 胜利提示模态框 -->
-    <div id="winModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 transform transition-transform duration-300 scale-95">
+    <div id="winModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300 modal-transition">
             <div class="text-center">
                 <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-trophy text-3xl text-yellow-500"></i>
@@ -366,9 +369,9 @@
                 stopTimer();
                 
                 winnerText.textContent = `${winner === 1 ? '黑棋' : '白棋'}获胜!`;
-                winModal.classList.remove('hidden');
                 
                 // 添加动画效果
+                winModal.classList.remove('pointer-events-none');
                 setTimeout(() => {
                     winModal.classList.add('opacity-100');
                     winModal.querySelector('div').classList.remove('scale-95');
@@ -383,7 +386,7 @@
                 winModal.querySelector('div').classList.add('scale-95');
                 
                 setTimeout(() => {
-                    winModal.classList.add('hidden');
+                    winModal.classList.add('pointer-events-none');
                 }, 300);
             }
             
@@ -514,4 +517,3 @@
     </script>
 </body>
 </html>
-    
